@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+			<p:panelGrid columns="2" style="width: 100%">
+				<p:outputLabel value="Adicionar Produto" />
+				<p:selectOneMenu id="buscaProduto">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem
+						itemLabel="0025125 - Roupeiro Aconchego 4 portas Americano RP0025 CINZA UNICO" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<p:dataTable  var="produto"
+				id="tabelaItens" style="margin-top: 20px;margin-bottom: 20px;" emptyMessage="Nenhum produto encontrado." >
+				<p:column headerText="Nota" style="text-align: center; width: 100px">
+					<h:outputText value="5762" />
+				</p:column>
+				<p:column headerText="Romaneio"
+					style="text-align: center; width: 100px">
+					<h:outputText value="32208" />
+				</p:column>
+				<p:column headerText="Pedido"
+					style="text-align: center; width: 100px">
+					<h:outputText value="0050123" />
+				</p:column>
+				<p:column headerText="Produto"
+					style="text-align: left; width: 100px">
+					<h:outputText
+						 />
+				</p:column>
+				<p:column headerText="Status" style="width: 100px">
+					<h:outputText value="Pendente" />
+				</p:column>
+				<p:column style="text-align: center; width: 50px">
+					<p:button icon="ui-icon-trash" title="Excluir" />
+				</p:column>
+			</p:dataTable>
+  	
+</ui:composition>

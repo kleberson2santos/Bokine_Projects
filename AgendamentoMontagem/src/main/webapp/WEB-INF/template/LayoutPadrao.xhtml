@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Sistema de Agendamento de Montagens</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+	
+</h:head>
+
+
+<h:body>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="loading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	<header>
+	<div style="float: left;">
+		<h:link outcome="/Home">
+			<h:graphicImage library="images" name="bokineLogo.png"
+				style="border-radius: 5px" />
+		</h:link>
+	</div>
+	<div style="float: right; margin-right: 110px">
+				<span style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
+				Olá usuário!
+				</span>
+				
+				<h:form style="display: inline-block">
+					<p:menubar styleClass="menu-sistema">
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuarios"/>
+						</p:submenu>
+						<p:submenu label="Montagens">
+							<p:menuitem value="Novo agendamento" outcome="/agendamentos/NovoAgendamento" />
+							<p:menuitem value="Pesquisa" outcome="/agendamentos/PesquisaAgendamentos" />
+						</p:submenu>
+						<p:menuitem value="Sair" />
+					</p:menubar>
+				</h:form>
+			</div>
+			<div style="clear: both"></div>
+	</header>
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator style="margin-top: 20px" />
+
+	<footer> Gestão de Tecnologia - Grupo Bokiné 
+			<a href="https://www.facebook.com/bokinelojas" target="_blank">
+				Facebook - Lojas Bokiné
+			</a>
+	</footer>
+</h:body>
+
+
+
+</html>

@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4"
+		style="width: 80%;height:100px;position:relative;margin-top: 20px;margin-bottom: 20px;">
+		<p:outputLabel value="Número" for="numero" />
+		<h:outputText id="numero" size="10"
+			value="#{cadastroAgendamentoBean.agendamento.id}" />
+
+		<p:outputLabel value="Data de criação" for="dataCriacao" />
+		<h:outputText id="dataCriacao" size="10"
+			value="#{cadastroAgendamentoBean.agendamento.dataCriacao}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+
+		<p:outputLabel value="Status" />
+		<h:outputText value="#{cadastroAgendamentoBean.agendamento.status}" />
+
+		<p:outputLabel value="Data da Montagem" for="dataMontagem" />
+		<h:panelGroup>
+			<p:calendar id="dataMontagem" size="10" pattern="dd/MM/yyyy"
+				value="#{cadastroAgendamentoBean.agendamento.dataMontagem}" />
+			<p:button icon="ui-icon-search" title="Disponibilidade" />
+		</h:panelGroup>
+
+		<p:outputLabel value="Cliente" for="cliente" />
+		<p:autoComplete id="cliente" size="40" dropdown="true"
+			value="#{cadastroAgendamentoBean.agendamento.cliente}" />
+
+		<p:outputLabel value="CPF" for="cpf" />
+		<p:inputText id="cpf" size="11"
+			value="#{cadastroAgendamentoBean.agendamento.documentoReceitaFederal}" />
+
+		<p:outputLabel value="Nota Fiscal" for="notaFiscal" />
+		<h:panelGrid columns="3" style="width: 100%">
+			<p:selectOneMenu id="notaFiscal"
+				value="#{cadastroAgendamentoBean.agendamento.notaFiscal}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItem itemLabel="5762" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Romaneio" for="romaneio" />
+			<p:selectOneMenu id="romaneio"
+				value="#{cadastroAgendamentoBean.agendamento.romaneio}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItem itemLabel="32208" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+		<p:outputLabel value="Pedido" for="pedido" />
+		<p:selectOneMenu id="pedido"
+			value="#{cadastroAgendamentoBean.agendamento.pedido}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItem itemLabel="00642661" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Telefone" for="telefone" />
+		<p:inputText id="telefone" size="11"
+			value="#{cadastroAgendamentoBean.agendamento.telefone}" />
+		<p:outputLabel value="Contato" for="contato" />
+		<p:inputText id="contato" size="11"
+			value="#{cadastroAgendamentoBean.agendamento.contato}" />
+	</p:panelGrid>
+
+</ui:composition>
