@@ -28,9 +28,9 @@
 
 		<p:outputLabel value="Cliente" for="cliente" />
 		<p:autoComplete id="cliente" size="40" dropdown="true"
-			value="#{cadastroAgendamentoBean.agendamento.filtro}" 
+			value="#{cadastroAgendamentoBean.filtro}" 
 			completeMethod="#{cadastroAgendamentoBean.completarCliente}"
-			forceSelection="true"/>
+			maxResults="5" forceSelection="true"/>
 
 		<p:outputLabel value="CPF" for="cpf" />
 		<p:inputText id="cpf" size="11"

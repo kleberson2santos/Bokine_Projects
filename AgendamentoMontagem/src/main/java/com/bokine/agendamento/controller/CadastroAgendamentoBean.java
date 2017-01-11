@@ -18,13 +18,12 @@ import com.bokine.agendamento.util.jsf.FacesUtil;
 @ViewScoped
 public class CadastroAgendamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-//	@Inject
-//	private Produtos produtos;
 	
 	@Inject
 	private Clientes clientes;
 	
 	private Agendamento agendamento;
+	private Cliente cliente;
 	private String filtro;
 
 
@@ -41,26 +40,17 @@ public class CadastroAgendamentoBean implements Serializable {
 		
 	}
 	
-	public void listar(){
-			List<Cliente> c = clientes.todosClientesFirebird();
-			System.out.println(">>"+c.get(0).getNome());
-	}
-	
 	public void inicializar(){
 		if(FacesUtil.isNotPostback()){
 			
 		}
 	}
 	
-	public List<Cliente> completarCliente(String nome){
-		List<Cliente> clientesFiltrados = new ArrayList<>();
-		List<Cliente> clienteFirebird = clientes.todosClientesFirebird();
-		for (Cliente cliente : clienteFirebird) {
-			if(cliente.getNome().equals(nome)){
-				clientesFiltrados.add(cliente);
-			}
-		}
-		return clientesFiltrados;
+	public List<String> completarCliente(String nome){
+		
+		cliente  = new Cliente(nome);
+		filtro=nome;
+		return clientes.porNome(getFiltro());
 	}
 	
 	 public List<String> completeText(String query) {
@@ -80,6 +70,14 @@ public class CadastroAgendamentoBean implements Serializable {
 		this.agendamento = agendamento;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public String getFiltro() {
 		return filtro;
 	}
@@ -89,7 +87,4 @@ public class CadastroAgendamentoBean implements Serializable {
 	}
 	
 	
-
-	
-
 }

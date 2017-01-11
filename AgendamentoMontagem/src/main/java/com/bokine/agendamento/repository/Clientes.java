@@ -26,43 +26,44 @@ public class Clientes implements Serializable {
 	private EntityManager manager;
 
 	public Set<Cliente> clientesFirebird = new HashSet<Cliente>();
-	public List<Cliente> todosclientesFirebird = new ArrayList<>();
+	public List<String> todosclientesFirebird;
 
-	public List<Cliente> porNome(String nome) {
-		return this.manager.createQuery("from Cliente " + "where upper(nome) like :nome", Cliente.class)
-				.setParameter("nome", nome.toUpperCase() + "%").getResultList();
+	public Cliente porNome2(String nome) {
+		Query q = managerCorporativo.createNativeQuery("select c.nome from Clientes c where upper(c.nome) = :nome")
+				.setParameter("nome", nome.toUpperCase());
+				
+				return (Cliente) q.getSingleResult();
 	}
 
-	public List<Cliente> todosClientesFirebird() {
-		Query q = managerCorporativo.createNativeQuery("select c.nome as nome from clientes c");
+	public List<String> porNome(String nome) {
+		Query q = managerCorporativo.createNativeQuery("select c.nome from Clientes c where upper(c.nome) like :nome")
+		.setParameter("nome", nome.toUpperCase() + "%");
+		
 		@SuppressWarnings("unchecked")
 		Collection<Object[]> results = q.getResultList();
 		Iterator<Object[]> ite = results.iterator();
+		todosclientesFirebird = new ArrayList<>();
 		while (ite.hasNext()) {
-			Cliente c = new Cliente();
+//			String c = new String();
 			Object element = ite.next();
 
-			c.setNome((String) element);
-			todosclientesFirebird.add(c);
+//			c.setNome((String) element);
+			todosclientesFirebird.add((String)element);
 		}
 		return todosclientesFirebird;
+		
+//		@SuppressWarnings("unchecked")
+//		Collection<Object[]> results = q.getResultList();
+//		Iterator<Object[]> ite = results.iterator();
+//		while (ite.hasNext()) {
+//			Cliente c = new Cliente();
+//			Object element = ite.next();
+//
+//			c.setNome((String) element);
+//			todosclientesFirebird.add(c);
+//		}
+//		return todosclientesFirebird;
 	}
-
-	// public Set<Cliente> todosClientesFirebird() {
-	// Query q = managerCorporativo
-	// .createNativeQuery("select c.nome from clientes c");
-	// @SuppressWarnings("unchecked")
-	// Collection<Object[]> results = q.getResultList();
-	// Iterator<Object[]> ite =results.iterator();
-	// while (ite.hasNext()) {
-	// Cliente c = new Cliente();
-	// Object[] result = (Object[]) ite.next();
-	// String nome = (String) result[0];
-	// c.setNome(nome);
-	// clientesFirebird.add(c);
-	// }
-	// return clientesFirebird;
-	// }
 
 	public Cliente porId(Long id) {
 		return manager.find(Cliente.class, id);

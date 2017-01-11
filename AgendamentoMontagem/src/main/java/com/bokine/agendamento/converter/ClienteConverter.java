@@ -25,17 +25,28 @@ public class ClienteConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Cliente retorno= null;
+		System.out.println("Transformando o value:"+value);
 		if(StringUtils.isNotEmpty(value)){
-			retorno = clientes.porId(new Long(value));		
+			retorno = clientes.porId(new Long(value));
+			System.out.println("PARA UM OBJETO:");			
 		}
+		System.out.println("Mas veio nulo");
 		return retorno;
 	}	
 
+	@SuppressWarnings("unused")
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		System.out.println("Transformando o objeto:"+value.toString());
 		if(value!=null){
 			Cliente cliente = (Cliente) value;
-			return cliente.getId() == null ? null : cliente.getId().toString();
+			System.out.println("PARA UM OBJETO:");
+			if(cliente.getId() == null){
+				System.out.println("MAS O ID VEIO NULLO");
+				return null;}
+			else{
+				return cliente.getId().toString();}
+			
 		}
 		return "";
 	}
