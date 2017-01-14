@@ -1,7 +1,6 @@
 package com.bokine.agendamento.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -24,8 +23,6 @@ public class CadastroAgendamentoBean implements Serializable {
 	
 	private Agendamento agendamento;
 	private Cliente cliente;
-	private String filtro;
-
 
 	public void salvar() {
 		throw new NegocioException("Agendamento nao pode ser salvo pois ainda nao foi implementado!");
@@ -37,30 +34,21 @@ public class CadastroAgendamentoBean implements Serializable {
 	
 	private void limpar(){
 		agendamento = new Agendamento();
-		
+		cliente = new Cliente();
 	}
 	
 	public void inicializar(){
 		if(FacesUtil.isNotPostback()){
-			
 		}
 	}
 	
-	public List<String> completarCliente(String nome){
-		
-		cliente  = new Cliente(nome);
-		filtro=nome;
-		return clientes.porNome(getFiltro());
+	public List<Cliente> completarCliente(String nome){
+		return clientes.porNome(nome);
 	}
 	
-	 public List<String> completeText(String query) {
-	        List<String> results = new ArrayList<String>();
-	        for(int i = 0; i < 10; i++) {
-	            results.add(query + i);
-	        }
-	         
-	        return results;
-	    }
+	public List<Cliente> completarCpf(String cpf){
+		return clientes.porCpf(cpf);
+	}
 
 	public Agendamento getAgendamento() {
 		return agendamento;
@@ -78,13 +66,5 @@ public class CadastroAgendamentoBean implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
-	
 	
 }

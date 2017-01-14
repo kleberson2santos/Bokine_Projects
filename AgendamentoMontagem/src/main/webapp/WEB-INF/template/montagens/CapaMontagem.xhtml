@@ -6,18 +6,23 @@
 
 	<p:panelGrid columns="4"
 		style="width: 80%;height:100px;position:relative;margin-top: 20px;margin-bottom: 20px;">
-		<p:outputLabel value="Número" for="numero" rendered="#{cadastroAgendamentoBean.agendamento.existente}"/>
+		<p:outputLabel value="Número" for="numero"
+			rendered="#{cadastroAgendamentoBean.agendamento.existente}" />
 		<h:outputText id="numero" size="10"
-			value="#{cadastroAgendamentoBean.agendamento.id}" rendered="#{cadastroAgendamentoBean.agendamento.existente}"/>
+			value="#{cadastroAgendamentoBean.agendamento.id}"
+			rendered="#{cadastroAgendamentoBean.agendamento.existente}" />
 
-		<p:outputLabel value="Data de criação" for="dataCriacao" rendered="#{cadastroAgendamentoBean.agendamento.existente}"/>
+		<p:outputLabel value="Data de criação" for="dataCriacao"
+			rendered="#{cadastroAgendamentoBean.agendamento.existente}" />
 		<h:outputText id="dataCriacao" size="10"
-			value="#{cadastroAgendamentoBean.agendamento.dataCriacao}" rendered="#{cadastroAgendamentoBean.agendamento.existente}">
+			value="#{cadastroAgendamentoBean.agendamento.dataCriacao}"
+			rendered="#{cadastroAgendamentoBean.agendamento.existente}">
 			<f:convertDateTime pattern=" dd/MM/yyyy" />
 		</h:outputText>
 
 		<p:outputLabel value="Status" />
-		<h:outputText value="#{cadastroAgendamentoBean.agendamento.status.descricao}" />
+		<h:outputText
+			value="#{cadastroAgendamentoBean.agendamento.status.descricao}" />
 
 		<p:outputLabel value="Data da Montagem" for="dataMontagem" />
 		<h:panelGroup>
@@ -28,13 +33,21 @@
 
 		<p:outputLabel value="Cliente" for="cliente" />
 		<p:autoComplete id="cliente" size="40" dropdown="true"
-			value="#{cadastroAgendamentoBean.filtro}" 
+			value="#{cadastroAgendamentoBean.cliente}" var="cliente"
+			itemLabel="#{cliente.nome}" itemValue="#{cliente}"
 			completeMethod="#{cadastroAgendamentoBean.completarCliente}"
-			maxResults="5" forceSelection="true"/>
-
-		<p:outputLabel value="CPF" for="cpf" />
-		<p:inputText id="cpf" size="11"
-			value="#{cadastroAgendamentoBean.agendamento.documentoReceitaFederal}" />
+			maxResults="5" forceSelection="true">
+			<p:ajax event="itemSelect" update="cpf" />
+		</p:autoComplete>
+		
+		<p:outputLabel value="Cpf" for="cpf" />
+		<p:autoComplete id="cpf" size="20" dropdown="true"
+			value="#{cadastroAgendamentoBean.cliente}" var="cliente"
+			itemLabel="#{cliente.cpf}" itemValue="#{cliente}"
+			completeMethod="#{cadastroAgendamentoBean.completarCpf}"
+			maxResults="5" forceSelection="true">
+			<p:ajax event="itemSelect" update="cliente" />
+		</p:autoComplete>
 
 		<p:outputLabel value="Nota Fiscal" for="notaFiscal" />
 		<h:panelGrid columns="3" style="width: 100%">
@@ -65,6 +78,5 @@
 		<p:inputText id="contato" size="11"
 			value="#{cadastroAgendamentoBean.agendamento.contato}" />
 	</p:panelGrid>
-	<p:commandButton value="Teste" action="#{cadastroAgendamentoBean.listar}" process="@this"/>
 
 </ui:composition>

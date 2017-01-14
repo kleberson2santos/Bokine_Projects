@@ -14,6 +14,7 @@ public class Cliente implements Serializable{
 
 	private Long id;
 	private String nome;
+	private String cpf;
 	
 	@Id
 	@GeneratedValue
@@ -36,7 +37,26 @@ public class Cliente implements Serializable{
 	public Cliente(String nome){
 		this.nome=nome;
 	}
+	
+	public Cliente(String nome,String cpf){
+		this.nome=nome;
+		this.cpf=cpf;
+	}
+	
 	public Cliente(){
+	}
+
+	@Override
+	public String toString() {
+		
+		return "[Cliente: "+this.nome+" Cpf: "+this.cpf+"]";
+	}
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override
